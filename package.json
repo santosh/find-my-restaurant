@@ -1,0 +1,22 @@
+{
+  "name": "find-my-restaurant",
+  "version": "1.0.0",
+  "description": "CRUD application written in ME*N stack. Done as part of upGrad Hackathon-2.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mern",
+    "crud",
+    "restaurant",
+    "startup",
+    "business"
+  ],
+  "author": "Santosh Kumar <https://santoshk.dev>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.1",
+    "mongoose": "^6.6.5"
+  }
+}
