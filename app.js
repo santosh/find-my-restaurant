@@ -18,6 +18,8 @@ db.on("open", () => {
 const app = express()
 app.use(express.json())
 
+require("./routes/restaurant.route")(app)
+
 app.listen(serverConfig.PORT, () => {
   console.log("Server started on the port no:", serverConfig.PORT);
 })
