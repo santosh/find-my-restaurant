@@ -98,6 +98,37 @@ exports.getRestaurantById = async (req, res) => {
   }
 }
 
+exports.updateRestaurantById = async (req, res) => {
+  try {
+    const id = req.params.id
+    const restaurant = await Restaurant.findOne({ _id: id })
+
+    if (Object.keys(req.body).length === 0) {
+      return res.status(400).send({ "message": "Restaurant Data is required." })
+    }
+
+    restaurant.name = req.body.name != undefined ? req.body.name : restaurant.name
+    restaurant.description = req.body.description != undefined ? req.body.description : restaurant.description
+    restaurant.category = req.body.category != undefined ? req.body.category : restaurant.category
+    restaurant.imageURL = req.body.imageURL != undefined ? req.body.imageURL : restaurant.imageURL
+    restaurant.location = req.body.location != undefined ? req.body.location : restaurant.location
+    restaurant.phone = req.body.phone != undefined ? req.body.phone : restaurant.phone
+    restaurant.rating = req.body.rating != undefined ? req.body.rating : restaurant.rating
+
+    await restaurant.save()
+
+    return res.status(200).send({ "message": "Restaurant updated successfully." })
+
+  } catch (err) {
+    console.log("Error updating restaurant", err.message);
+
+    // the status should be 404, but the specs said to use 200
+    return res.status(200).send({
+      message: "No Restaurant found with the given ID"
+    })
+  }
+}
+
 // getRestaurantByRating returns a list of restaurant with restaurant having 
 // rating equal or greater than the passed ratingValue parameter.
 exports.getRestaurantByRating = async (req, res) => {
