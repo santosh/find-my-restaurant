@@ -30,11 +30,11 @@ exports.createRestaurant = async (req, res) => {
       updatedAt: restaurantCreated.updatedAt,
       __v: restaurantCreated.__v
     }
-    return res.status(201).json(restaurantResp)
+    return res.status(201).send(restaurantResp)
 
   } catch (error) {
     console.log("Error while creating a new restaurant", error.message);
-    return res.status(500).json({
+    return res.status(500).send({
       message: "Some error occurred while creating the Restaurant"
     })
   }
@@ -51,7 +51,7 @@ exports.getAllRestaurant = async (req, res) => {
     });
   } catch (err) {
     console.log("Error while fetching restaurants", err.message);
-    return res.status(500).json({
+    return res.status(500).send({
       message: "Some error occured while fetching the Restaurants"
     })
   }
@@ -66,7 +66,7 @@ exports.getAllCategories = (req, res) => {
 
   } catch (err) {
     console.log("Error while fetching categories", err.message);
-    return res.status(500).json({
+    return res.status(500).send({
       message: "Some error occurred while fetching Categories"
     })
   }
@@ -79,8 +79,21 @@ exports.getRestaurantByCategory = async (req, res) => {
     return res.status(200).send(restaurants)
   } catch (err) {
     console.log("Error while fetching restaurants", err.message);
-    return res.status(500).json({
+    return res.status(500).send({
       message: "Some error occured while fetching the Restaurant"
+    })
+  }
+}
+
+exports.getRestaurantById = async (req, res) => {
+  try {
+    const id = req.params.id
+    const restaurant = await Restaurant.find({ _id: id })
+    return res.status(200).send(restaurant)
+  } catch (err) {
+    console.log("Restaurant not found", err.message);
+    return res.status(404).send({
+      message: "No Restaurant found with the given ID"
     })
   }
 }
