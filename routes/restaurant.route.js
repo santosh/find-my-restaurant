@@ -7,5 +7,6 @@ module.exports = (app) => {
   app.get("/api/restaurant/categories/:categoryName", restaurantController.getRestaurantByCategory)
   app.get("/api/restaurant/:id", restaurantController.getRestaurantById)
   app.put("/api/restaurant/:id", restaurantController.updateRestaurantById)
+  app.delete("/api/restaurant/:id", restaurantController.deleteRestaurantById)
   app.get("/api/restaurant/rating/:ratingValue", restaurantController.getRestaurantByRating)
 }

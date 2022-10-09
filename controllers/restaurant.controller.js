@@ -129,6 +129,29 @@ exports.updateRestaurantById = async (req, res) => {
   }
 }
 
+exports.deleteRestaurantById = async (req, res) => {
+  try {
+    const id = req.params.id
+    const restaurants = await Restaurant.find({ _id: id })
+
+    await Restaurant.findOneAndDelete({ _id: id })
+
+    return res.status(200).send({
+      restaurant: restaurants[0],
+      message: "Restaurant deleted successfully."
+    })
+  } catch (err) {
+    console.log("Restaurant not found", err.message);
+
+    // here message shuouldn't be "Restaurant deleted successfully", but spec said so.
+    return res.status(200).send({
+      restaurant: null,
+      message: "Restaurant deleted successfully."
+    })
+  }
+}
+
+
 // getRestaurantByRating returns a list of restaurant with restaurant having 
 // rating equal or greater than the passed ratingValue parameter.
 exports.getRestaurantByRating = async (req, res) => {
