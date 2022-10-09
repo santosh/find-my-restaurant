@@ -4,4 +4,5 @@ module.exports = (app) => {
   app.post("/api/restaurant/add", restaurantController.createRestaurant)
   app.get("/api/restaurant/", restaurantController.getAllRestaurant)
   app.get("/api/restaurant/categories", restaurantController.getAllCategories)
+  app.get("/api/restaurant/categories/:categoryName", restaurantController.getRestaurantByCategory)
 }
