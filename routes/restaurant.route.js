@@ -9,4 +9,5 @@ module.exports = (app) => {
   app.put("/api/restaurant/:id", restaurantController.updateRestaurantById)
   app.delete("/api/restaurant/:id", restaurantController.deleteRestaurantById)
   app.get("/api/restaurant/rating/:ratingValue", restaurantController.getRestaurantByRating)
+  app.delete("/api/restaurant/", restaurantController.deleteAllRestaurants)
 }

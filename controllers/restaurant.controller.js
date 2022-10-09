@@ -167,3 +167,21 @@ exports.getRestaurantByRating = async (req, res) => {
     })
   }
 }
+
+exports.deleteAllRestaurants = async (req, res) => {
+  try {
+    const restaurants = await Restaurant.deleteMany({})
+    return res.status(200).send({
+      restaurants: {
+        "acknowledged": restaurants.acknowledged,
+        "deletedCount": restaurants.deletedCount,
+      },
+      message: "Restaurants deleted successfully."
+    })
+  } catch (err) {
+    console.log("Some error occured:", err.message);
+    return res.status(500).send({
+      message: "Some error occured while deleting the Restaurant."
+    })
+  }
+}
