@@ -52,7 +52,22 @@ exports.getAllRestaurant = async (req, res) => {
   } catch (err) {
     console.log("Error while fetching restaurants", err.message);
     return res.status(500).json({
-      message: "Some error occured while fetching the Restaurants."
+      message: "Some error occured while fetching the Restaurants"
+    })
+  }
+}
+
+exports.getAllCategories = (req, res) => {
+  try {
+    Restaurant.distinct('category', (err, categories) => {
+      return res.send(categories);
+
+    })
+
+  } catch (err) {
+    console.log("Error while fetching categories", err.message);
+    return res.status(500).json({
+      message: "Some error occurred while fetching Categories"
     })
   }
 }
